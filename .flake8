@@ -1,0 +1,29 @@
+[flake8]
+# 最大行长度
+max-line-length = 88
+
+# 忽略的错误类型
+ignore =
+    E203,  # 冒号前空格
+    E266,  # 多个井号注释
+    E501,  # 行太长
+    W503,  # 运算符前换行
+    W504,  # 运算符后换行
+
+# 排除的目录和文件
+exclude =
+    .git,
+    __pycache__,
+    build,
+    dist,
+    .venv,
+    venv,
+    .eggs,
+    *.egg
+
+# 每个文件的最大复杂度
+max-complexity = 10
+
+# 每个函数的复杂度
+per-file-ignores =
+    __init__.py:F401
