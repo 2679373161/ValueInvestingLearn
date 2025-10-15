@@ -1,0 +1,156 @@
+{
+  "app": {
+    "name": "量化择时指标应用",
+    "version": "1.0.0",
+    "environment": "development",
+    "debug": true,
+    "secret_key": "your-secret-key-here"
+  },
+
+  "server": {
+    "host": "0.0.0.0",
+    "port": 5000,
+    "cors_origins": ["http://localhost:3000", "http://127.0.0.1:3000"]
+  },
+
+  "database": {
+    "type": "file",
+    "file_path": "data/application_data.json",
+    "backup_enabled": true,
+    "backup_interval_hours": 24
+  },
+
+  "ai": {
+    "provider": "deepseek",
+    "api_key": "your-deepseek-api-key-here",
+    "base_url": "https://api.deepseek.com",
+    "model": "deepseek-chat",
+    "max_tokens": 2000,
+    "temperature": 0.7,
+    "cache_enabled": true,
+    "cache_ttl_minutes": 60
+  },
+
+  "timing_indicators": {
+    "weights": {
+      "macro_fundamental": 0.4,
+      "industry_fundamental": 0.3,
+      "market_sentiment": 0.3
+    },
+
+    "macro_indicators": {
+      "pmi": {
+        "threshold_good": 50,
+        "threshold_bad": 45,
+        "weight": 0.2
+      },
+      "cpi": {
+        "threshold_good": 2.0,
+        "threshold_bad": 5.0,
+        "weight": 0.2
+      },
+      "ppi": {
+        "threshold_good": 1.5,
+        "threshold_bad": 4.0,
+        "weight": 0.15
+      },
+      "m2": {
+        "threshold_good": 8.0,
+        "threshold_bad": 15.0,
+        "weight": 0.15
+      },
+      "interest_rate": {
+        "threshold_good": 2.0,
+        "threshold_bad": 5.0,
+        "weight": 0.15
+      },
+      "other_macro": {
+        "weight": 0.15
+      }
+    },
+
+    "industry_indicators": {
+      "free_cash_flow": {
+        "weight": 0.6
+      },
+      "industry_sentiment": {
+        "weight": 0.4
+      }
+    },
+
+    "market_sentiment_indicators": {
+      "volatility": {
+        "weight": 0.3
+      },
+      "investor_sentiment": {
+        "weight": 0.4
+      },
+      "technical_indicators": {
+        "weight": 0.3
+      }
+    }
+  },
+
+  "markets": {
+    "a_share": {
+      "enabled": true,
+      "indices": ["沪深300", "创业板", "红利指数"],
+      "update_frequency": "daily"
+    },
+    "hong_kong": {
+      "enabled": true,
+      "indices": ["恒生指数", "恒生科技"],
+      "update_frequency": "daily"
+    },
+    "nasdaq": {
+      "enabled": true,
+      "indices": ["纳斯达克综合指数"],
+      "update_frequency": "daily"
+    }
+  },
+
+  "data_sources": {
+    "macro_data": {
+      "input_mode": "manual",
+      "update_frequency": "weekly"
+    },
+    "market_sentiment": {
+      "input_mode": "manual",
+      "real_time_enabled": false,
+      "update_frequency": "daily"
+    }
+  },
+
+  "position_sizing": {
+    "enabled": true,
+    "max_position_percentage": 80,
+    "risk_per_trade_percentage": 2,
+    "scoring_thresholds": {
+      "very_strong": 80,
+      "strong": 60,
+      "neutral": 40,
+      "weak": 20,
+      "very_weak": 0
+    },
+    "position_sizes": {
+      "very_strong": 80,
+      "strong": 60,
+      "neutral": 30,
+      "weak": 10,
+      "very_weak": 0
+    }
+  },
+
+  "logging": {
+    "level": "INFO",
+    "file_path": "logs/app.log",
+    "max_file_size_mb": 10,
+    "backup_count": 5
+  },
+
+  "cache": {
+    "enabled": true,
+    "ttl_minutes": 30,
+    "max_size_mb": 100
+  }
+}
