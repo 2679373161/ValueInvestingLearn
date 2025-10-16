@@ -134,7 +134,8 @@ const Analysis = () => {
     },
   ]
 
-  const indicatorData = [
+  // 确保数据存在后再计算indicatorData
+  const indicatorData = data && data.indicators ? [
     {
       key: '1',
       type: '宏观基本面',
@@ -156,7 +157,22 @@ const Analysis = () => {
       weight: 30,
       status: data.indicators.sentiment.score >= 80 ? '良好' : data.indicators.sentiment.score >= 60 ? '一般' : '较差',
     },
-  ]
+  ] : []
+
+  // 如果数据不存在，显示加载状态
+  if (!data) {
+    return (
+      <div className="page-container">
+        <Title level={2}>分析结果</Title>
+        <Alert
+          message="数据加载中..."
+          description="正在获取分析数据，请稍候。"
+          type="info"
+          showIcon
+        />
+      </div>
+    )
+  }
 
   return (
     <div className="page-container">
@@ -192,8 +208,8 @@ const Analysis = () => {
           <Card className="card-shadow">
             <Statistic
               title="AI分析风险等级"
-              value={data.aiAnalysis.riskLevel}
-              valueStyle={{ color: getRiskLevelColor(data.aiAnalysis.riskLevel) }}
+              value={data?.aiAnalysis?.riskLevel || '未知'}
+              valueStyle={{ color: getRiskLevelColor(data?.aiAnalysis?.riskLevel || '未知') }}
             />
             <div style={{ marginTop: 16 }}>
               <Text type="secondary">基于深度学习和市场数据</Text>
@@ -205,12 +221,12 @@ const Analysis = () => {
           <Card className="card-shadow">
             <Statistic
               title="建议仓位"
-              value={data.positionSizing.suggestedPosition}
+              value={data?.positionSizing?.suggestedPosition || 0}
               suffix="%"
               valueStyle={{ color: '#1890ff' }}
             />
             <div style={{ marginTop: 16 }}>
-              <Text type="secondary">范围: {data.positionSizing.minPosition}% - {data.positionSizing.maxPosition}%</Text>
+              <Text type="secondary">范围: {data?.positionSizing?.minPosition || 0}% - {data?.positionSizing?.maxPosition || 0}%</Text>
             </div>
           </Card>
         </Col>
@@ -230,7 +246,7 @@ const Analysis = () => {
           <Row gutter={16}>
             <Col xs={24} sm={8}>
               <Card size="small" title="宏观指标" style={{ marginBottom: 16 }}>
-                {Object.entries(data.indicators.macro.breakdown).map(([key, value]) => (
+                {data?.indicators?.macro?.breakdown && Object.entries(data.indicators.macro.breakdown).map(([key, value]) => (
                   <div key={key} style={{ marginBottom: 8, display: 'flex', justifyContent: 'space-between' }}>
                     <Text>{key.toUpperCase()}</Text>
                     <Text strong style={{ color: getScoreColor(value) }}>
@@ -242,7 +258,7 @@ const Analysis = () => {
             </Col>
             <Col xs={24} sm={8}>
               <Card size="small" title="行业指标" style={{ marginBottom: 16 }}>
-                {Object.entries(data.indicators.industry.breakdown).map(([key, value]) => (
+                {data?.indicators?.industry?.breakdown && Object.entries(data.indicators.industry.breakdown).map(([key, value]) => (
                   <div key={key} style={{ marginBottom: 8, display: 'flex', justifyContent: 'space-between' }}>
                     <Text>{key === 'free_cash_flow' ? '自由现金流' : '行业情绪'}</Text>
                     <Text strong style={{ color: getScoreColor(value) }}>
@@ -254,7 +270,7 @@ const Analysis = () => {
             </Col>
             <Col xs={24} sm={8}>
               <Card size="small" title="情绪指标" style={{ marginBottom: 16 }}>
-                {Object.entries(data.indicators.sentiment.breakdown).map(([key, value]) => (
+                {data?.indicators?.sentiment?.breakdown && Object.entries(data.indicators.sentiment.breakdown).map(([key, value]) => (
                   <div key={key} style={{ marginBottom: 8, display: 'flex', justifyContent: 'space-between' }}>
                     <Text>{key.toUpperCase()}</Text>
                     <Text strong style={{ color: getScoreColor(value) }}>
@@ -272,14 +288,14 @@ const Analysis = () => {
       <Card title="AI智能分析" className="card-shadow" style={{ marginBottom: 24 }}>
         <Alert
           message="分析摘要"
-          description={data.aiAnalysis.summary}
+          description={data?.aiAnalysis?.summary || '暂无分析摘要'}
           type="info"
           style={{ marginBottom: 16 }}
         />
 
         <Title level={5}>投资建议</Title>
         <ul style={{ paddingLeft: 20 }}>
-          {data.aiAnalysis.recommendations.map((recommendation, index) => (
+          {data?.aiAnalysis?.recommendations?.map((recommendation, index) => (
             <li key={index} style={{ marginBottom: 8 }}>
               <Text>{recommendation}</Text>
             </li>
@@ -301,12 +317,12 @@ const Analysis = () => {
             <div style={{ marginBottom: 16 }}>
               <Text strong>建议仓位: </Text>
               <Text style={{ color: '#1890ff', fontSize: '18px', fontWeight: 'bold' }}>
-                {data.positionSizing.suggestedPosition}%
+                {data?.positionSizing?.suggestedPosition || 0}%
               </Text>
             </div>
 
             <Progress
-              percent={data.positionSizing.suggestedPosition}
+              percent={data?.positionSizing?.suggestedPosition || 0}
               strokeColor={{
                 '0%': '#108ee9',
                 '100%': '#87d068',
@@ -316,14 +332,14 @@ const Analysis = () => {
 
             <div style={{ marginTop: 16 }}>
               <Text type="secondary">
-                建议仓位范围: {data.positionSizing.minPosition}% - {data.positionSizing.maxPosition}%
+                建议仓位范围: {data?.positionSizing?.minPosition || 0}% - {data?.positionSizing?.maxPosition || 0}%
               </Text>
             </div>
           </Col>
 
           <Col xs={24} sm={12}>
             <Title level={5}>资产配置建议</Title>
-            {Object.entries(data.positionSizing.allocation).map(([asset, percentage]) => (
+            {data?.positionSizing?.allocation && Object.entries(data.positionSizing.allocation).map(([asset, percentage]) => (
               <div key={asset} style={{ marginBottom: 12, display: 'flex', justifyContent: 'space-between' }}>
                 <Text>
                   {asset === 'equities' ? '权益类资产' :

@@ -11,7 +11,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'http://0.0.0.0:5000',
         changeOrigin: true,
         secure: false,
       },
@@ -42,6 +42,7 @@ export default defineConfig({
       '@utils': resolve(__dirname, 'src/utils'),
       '@services': resolve(__dirname, 'src/services'),
       '@hooks': resolve(__dirname, 'src/hooks'),
+      '@contexts': resolve(__dirname, 'src/contexts'),
     },
   },
 

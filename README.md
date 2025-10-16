@@ -94,7 +94,7 @@
 
 1. **启动后端服务**
    ```bash
-   python app/main.py
+   python run.py
    ```
    后端服务将在 http://localhost:5000 启动
 
@@ -126,7 +126,9 @@ ValueInvestingLearn/
 ├── data/                  # 数据存储
 ├── docs/                  # 项目文档
 ├── scripts/               # 开发脚本
-└── tasks/                 # 开发任务管理
+├── tasks/                 # 开发任务管理
+├── run.py                 # 应用启动脚本
+└── run_tests.py           # 测试运行脚本
 ```
 
 ## 🔧 开发指南
@@ -147,7 +149,7 @@ black app/ tests/
 flake8 app/ tests/
 
 # 运行测试
-pytest
+python run_tests.py
 
 # 前端代码格式化
 cd frontend && npm run format

@@ -8,7 +8,11 @@
 
 import os
 import sys
-from . import create_app
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
+from app import create_app
 
 
 def main():
@@ -17,7 +21,7 @@ def main():
         app = create_app()
 
         # 获取配置
-        from .utils.config import config_manager
+        from app.utils.config import config_manager
         host = config_manager.get('server.host', '0.0.0.0')
         port = config_manager.get('server.port', 5000)
         debug = config_manager.get('app.debug', False)
