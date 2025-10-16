@@ -44,6 +44,9 @@ def create_app():
     # 注册错误处理器
     _register_error_handlers(app)
 
+    # 添加API文档端点
+    _add_api_docs(app)
+
     return app
 
 
@@ -97,3 +100,42 @@ def _register_error_handlers(app):
             'error': '服务器错误',
             'message': '发生未知错误'
         }, 500
+
+
+def _add_api_docs(app):
+    """添加API文档端点"""
+
+    @app.route('/api/docs')
+    def api_docs():
+        """API文档页面"""
+        return {
+            'title': '量化择时指标应用 API',
+            'version': '1.0.0',
+            'description': '基于多维度择时框架的量化分析工具API',
+            'endpoints': {
+                'data': {
+                    'macro': '/api/data/macro',
+                    'market_sentiment': '/api/data/market-sentiment',
+                    'industry': '/api/data/industry',
+                    'health': '/api/data/health'
+                },
+                'analysis': {
+                    'timing_indicators': '/api/analysis/timing-indicators',
+                    'ai_analysis': '/api/analysis/ai-analysis',
+                    'position_sizing': '/api/analysis/position-sizing',
+                    'market_comparison': '/api/analysis/market-comparison',
+                    'summary': '/api/analysis/summary',
+                    'health': '/api/analysis/health'
+                },
+                'visualization': {
+                    'timing_score_trend': '/api/visualization/timing-score-trend',
+                    'market_comparison_chart': '/api/visualization/market-comparison-chart',
+                    'indicator_breakdown': '/api/visualization/indicator-breakdown',
+                    'position_sizing_chart': '/api/visualization/position-sizing-chart',
+                    'sentiment_analysis': '/api/visualization/sentiment-analysis',
+                    'macro_indicators': '/api/visualization/macro-indicators',
+                    'dashboard_summary': '/api/visualization/dashboard-summary',
+                    'health': '/api/visualization/health'
+                }
+            }
+        }

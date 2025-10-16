@@ -20,10 +20,13 @@
 - `frontend/src/components/Dashboard.js` - 仪表盘组件
 - `frontend/src/components/Visualization.js` - 可视化组件
 - `frontend/src/services/api.js` - API调用服务
-- `tests/test_data_service.py` - 数据服务单元测试
-- `tests/test_indicator_service.py` - 指标计算单元测试
-- `tests/test_ai_service.py` - AI服务单元测试
-- `tests/test_routes.py` - API路由测试
+- `tests/unit/test_data_service.py` - 数据服务单元测试
+- `tests/unit/test_indicator_service.py` - 指标计算单元测试
+- `tests/unit/test_ai_service.py` - AI服务单元测试
+- `tests/integration/test_api_integration.py` - API集成测试
+- `tests/performance/test_performance.py` - 性能测试
+- `run_tests.py` - 测试运行脚本
+- `docs/USER_GUIDE.md` - 用户使用指南
 - `config/config.json` - 应用配置文件
 - `data/` - 数据存储目录
 - `requirements.txt` - Python依赖
@@ -81,23 +84,23 @@
   - [x] 5.7 添加AI分析结果缓存
   - [x] 5.8 实现API密钥安全管理
 
-- [ ] 6.0 Web前端开发
-  - [ ] 6.1 搭建React/Vue.js前端项目结构
-  - [ ] 6.2 创建数据输入表单组件
-  - [ ] 6.3 实现仪表盘主界面
-  - [ ] 6.4 集成ECharts/Chart.js可视化图表
-  - [ ] 6.5 开发择时评分显示组件
-  - [ ] 6.6 实现AI建议展示组件
-  - [ ] 6.7 创建多市场切换功能
-  - [ ] 6.8 添加响应式布局和主题切换
-  - [ ] 6.9 实现前端API调用服务
+- [x] 6.0 Web前端开发
+  - [x] 6.1 搭建React/Vue.js前端项目结构
+  - [x] 6.2 创建数据输入表单组件
+  - [x] 6.3 实现仪表盘主界面
+  - [x] 6.4 集成ECharts/Chart.js可视化图表
+  - [x] 6.5 开发择时评分显示组件
+  - [x] 6.6 实现AI建议展示组件
+  - [x] 6.7 创建多市场切换功能
+  - [x] 6.8 添加响应式布局和主题切换
+  - [x] 6.9 实现前端API调用服务
 
-- [ ] 7.0 系统集成与测试
-  - [ ] 7.1 集成前后端通信
-  - [ ] 7.2 实现端到端功能测试
-  - [ ] 7.3 编写单元测试（数据服务、指标计算、AI服务）
-  - [ ] 7.4 创建集成测试用例
-  - [ ] 7.5 进行性能测试和优化
-  - [ ] 7.6 完善错误处理和用户提示
-  - [ ] 7.7 创建用户使用文档
-  - [ ] 7.8 部署和运行验证
+- [x] 7.0 系统集成与测试
+  - [x] 7.1 集成前后端通信
+  - [x] 7.2 实现端到端功能测试
+  - [x] 7.3 编写单元测试（数据服务、指标计算、AI服务）
+  - [x] 7.4 创建集成测试用例
+  - [x] 7.5 进行性能测试和优化
+  - [x] 7.6 完善错误处理和用户提示
+  - [x] 7.7 创建用户使用文档
+  - [x] 7.8 部署和运行验证
